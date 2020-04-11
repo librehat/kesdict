@@ -12,6 +12,7 @@ ScrollView {
     ListView {
         width: parent.width
         height: parent.height
+        spacing: 5
         model: resultModel
         delegate: resultDelegate
     }
@@ -20,7 +21,7 @@ ScrollView {
         id: resultDelegate
         Column {
             width: parent.width
-            height: 90
+            height: 80
             spacing: 2
             Row {
                 width: parent.width
@@ -30,19 +31,31 @@ ScrollView {
                     font.weight: Font.Black
                 }
                 Label {
-                    text: part
-                    font.italic: true
+                    text: part + (gender ? ` (${gender})` : "")
+                    font.weight: Font.Light
+                    font.capitalization: Font.SmallCaps
                 }
             }
-            Label {
-                id: meaningLabel
-                text: meaning
+            Row {
+                id: meaningRow
+                width: parent.width
+                spacing: 20
+                Label {
+                    text: meaning
+                    font.weight: Font.DemiBold
+                }
+                Label {
+                    text: `(${regions})`
+                    visible: regions
+                    font.weight: Font.Light
+                    font.capitalization: Font.SmallCaps
+                }
             }
             ListModel {
                 id: examplesModel
             }
             ListView {
-                anchors.top: meaningLabel.bottom
+                anchors.top: meaningRow.bottom
                 width: parent.width
                 model: examplesModel
                 delegate: Row {
@@ -58,7 +71,7 @@ ScrollView {
                         Label {
                             text: translated
                             font.italic: true
-                            font.weight: Font.Light
+                            font.weight: Font.ExtraLight
                         }
                     }
                 }
@@ -71,6 +84,7 @@ ScrollView {
         resultModel.clear()
         data.forEach((item) => {
             item.examples = JSON.stringify(item.examples)
+            item.regions = item.regions.join(", ")
             resultModel.append(item)
         })
     }
