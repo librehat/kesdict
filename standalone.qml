@@ -25,12 +25,13 @@ ApplicationWindow {
                 enabled: searchTextField.text
                 text: "Search"
                 onClicked: {
-                    Request.query("translate", searchTextField.text, function (res) {
+                    Request.queryP("translate", searchTextField.text)
+                    .then((res) => {
                         if (res) {
-                            const extracted = Dictionary.extract(res);
-                            console.debug("Got results", extracted);
-                            resultView.data = extracted;
+                            resultView.data = Dictionary.extract(res);
                         }
+                    }).catch((error) => {
+                        console.error(error);
                     })
                 }
             }
