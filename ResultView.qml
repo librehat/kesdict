@@ -29,7 +29,7 @@ ScrollView {
                     font.weight: Font.Black
                 }
                 Label {
-                    text: part + (gender ? ` (${gender})` : "")
+                    text: partWithGender
                     font.weight: Font.Light
                     font.capitalization: Font.SmallCaps
                 }
@@ -99,6 +99,7 @@ ScrollView {
         data.forEach((item) => {
             item.examples = JSON.stringify(item.examples)
             item.regions = item.regions.join(", ")
+            item.partWithGender = item.part + (item.gender ? ` (${item.gender})` : "")
             resultModel.append(item)
         })
     }
