@@ -2,7 +2,6 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import "sdapi.dictionary.qml.js" as Dictionary
-import "sdrequest.qml.js" as Request
 
 ApplicationWindow {
     visible: true
@@ -11,7 +10,25 @@ ApplicationWindow {
     title: "KesDict 🇪🇸"
 
     property bool loading: false
-    
+
+    HttpRequest {
+        id: http
+    }
+
+    Connections {
+        target: http
+        onResponseTextAvailable: {
+            if (text) {
+                resultView.data = Dictionary.extract(text)
+            }
+            loading = false
+        }
+        onError: {
+            console.error(msg)
+            loading = false
+        }
+    }
+
     ColumnLayout {
         spacing: 2
         anchors.fill: parent
@@ -28,17 +45,8 @@ ApplicationWindow {
                 enabled: searchTextField.text
                 text: "Search"
                 onClicked: {
-                    loading = true;
-                    Request.queryP("translate", searchTextField.text)
-                    .then((res) => {
-                        resultView.data = Dictionary.extract(res);
-                    }).catch((error) => {
-                        console.error(error);
-                        resultView.data = [];
-                    })
-                    .then(() => {
-                        loading = false;
-                    });
+                    loading = true
+                    http.request(`https://www.spanishdict.com/translate/${searchTextField.text}`)
                 }
             }
         }
