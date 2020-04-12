@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 import QtQml.Models 2.12
  
 ScrollView {
@@ -10,21 +11,18 @@ ScrollView {
     }
 
     ListView {
-        width: parent.width
-        height: parent.height
-        spacing: 5
+        anchors.fill: parent
+        spacing: 10
         model: resultModel
         delegate: resultDelegate
     }
 
     Component {
         id: resultDelegate
-        Column {
-            width: parent.width
-            height: 80
-            spacing: 2
-            Row {
-                width: parent.width
+        ColumnLayout {
+            spacing: 0
+            RowLayout {
+                Layout.fillWidth: true
                 spacing: 20
                 Label {
                     text: word
@@ -36,9 +34,9 @@ ScrollView {
                     font.capitalization: Font.SmallCaps
                 }
             }
-            Row {
+            RowLayout {
                 id: meaningRow
-                width: parent.width
+                Layout.fillWidth: true
                 spacing: 20
                 Label {
                     text: meaning
@@ -55,23 +53,33 @@ ScrollView {
                 id: examplesModel
             }
             ListView {
-                anchors.top: meaningRow.bottom
-                width: parent.width
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.preferredHeight: examplesModel.count * 35
+                Layout.leftMargin: 10
                 model: examplesModel
-                delegate: Row {
-                    spacing: 5
-                    Label {
-                        text: index + 1
-                    }
-                    Column {
-                        spacing: 0
+                delegate: ItemDelegate {
+                    RowLayout {
+                        spacing: 10
                         Label {
-                            text: original
+                            text: '❖'
                         }
-                        Label {
-                            text: translated
-                            font.italic: true
-                            font.weight: Font.ExtraLight
+                        ColumnLayout {
+                            spacing: -1
+                            Label {
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                text: original
+                                wrapMode: Text.WordWrap
+                            }
+                            Label {
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                text: translated
+                                wrapMode: Text.WordWrap
+                                font.italic: true
+                                font.weight: Font.ExtraLight
+                            }
                         }
                     }
                 }
