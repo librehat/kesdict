@@ -899,29 +899,31 @@ function convertExample(example, lang) {
     };
 }
 function convertSense(sense, lang) {
-    var translation = sense.translations[0];
-    return {
-        word: sense.subheadword,
-        lang: lang,
-        gender: sense.gender ? convertGender(sense.gender) : undefined,
-        context: sense.context,
-        meaning: translation.translation,
-        part: sense.partOfSpeech.nameEn,
-        examples: translation.examples.map(function (eg) { return convertExample(eg, lang); }),
-        regions: sense.regions.map(function (region) { return region.nameEn; })
-    };
+    return sense.translations.map(function (translation) {
+        var _a;
+        return ({
+            word: sense.subheadword,
+            lang: lang,
+            gender: sense.gender ? convertGender(sense.gender) : undefined,
+            context: sense.context + (((_a = translation.contextEn) === null || _a === void 0 ? void 0 : _a.length) ? ", " + translation.contextEn : ''),
+            meaning: translation.translation,
+            part: sense.partOfSpeech.nameEn,
+            examples: translation.examples.map(function (eg) { return convertExample(eg, lang); }),
+            regions: sense.regions.concat(translation.regions).map(function (region) { return region.nameEn; })
+        });
+    });
 }
 function extract(html) {
-    var _a, _b;
+    var _a, _b, _c;
     var resultsProps = extractComponentData(html).sdDictionaryResultsProps;
     var neodict = (_b = (_a = resultsProps) === null || _a === void 0 ? void 0 : _a.entry) === null || _b === void 0 ? void 0 : _b.neodict;
-    if (!neodict || !neodict.length) {
+    if (!((_c = neodict) === null || _c === void 0 ? void 0 : _c.length)) {
         throw new Error('Cannot find neodict. SpanishDict API might have changed');
     }
     return neodict
         .map(function (nd) { return nd.posGroups; }).reduce(function (acc, val) { return acc.concat(val); }, [])
         .map(function (posGroup) { return posGroup.senses; }).reduce(function (acc, val) { return acc.concat(val); }, [])
-        .map(function (sense) { return convertSense(sense, resultsProps.entryLang); });
+        .reduce(function (acc, val) { return acc.concat(convertSense(val, resultsProps.entryLang)); }, []);
 }
 
 module.exports = extract;
