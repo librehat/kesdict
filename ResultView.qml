@@ -43,6 +43,12 @@ ScrollView {
                     font.weight: Font.DemiBold
                 }
                 Label {
+                    text: `(${context})`
+                    visible: context
+                    font.weight: Font.Light
+                    font.italic: true
+                }
+                Label {
                     text: `(${regions})`
                     visible: regions
                     font.weight: Font.Light
