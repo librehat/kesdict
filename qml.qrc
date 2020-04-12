@@ -2,6 +2,7 @@
     <qresource prefix="/">
         <file>standalone.qml</file>
         <file>HttpRequest.qml</file>
+        <file>ResultDelegate.qml</file>
         <file>ResultView.qml</file>
         <file>sdapi.dictionary.qml.js</file>
     </qresource>
