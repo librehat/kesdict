@@ -63,7 +63,9 @@ ScrollView {
                 Layout.fillHeight: true
                 Layout.preferredHeight: examplesModel.count * 35
                 Layout.leftMargin: 10
+
                 model: examplesModel
+                interactive: false
                 delegate: ItemDelegate {
                     RowLayout {
                         spacing: 10
