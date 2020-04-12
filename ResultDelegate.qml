@@ -1,7 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
-import QtQml.Models 2.12
  
 Component {
     ColumnLayout {
@@ -40,16 +39,13 @@ Component {
                 font.capitalization: Font.SmallCaps
             }
         }
-        ListModel {
-            id: examplesModel
-        }
         ListView {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.preferredHeight: examplesModel.count * 35
+            Layout.preferredHeight: examples.count * 35
             Layout.leftMargin: 10
 
-            model: examplesModel
+            model: examples
             interactive: false
             delegate: ItemDelegate {
                 RowLayout {
@@ -77,6 +73,5 @@ Component {
                 }
             }
         }
-        Component.onCompleted: JSON.parse(examples).forEach((ex) => examplesModel.append(ex))
     }
 }

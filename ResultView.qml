@@ -21,7 +21,6 @@ ScrollView {
             onDataChanged: {
                 resultModel.clear()
                 view.data.forEach((item) => {
-                    item.examples = JSON.stringify(item.examples)
                     item.regions = item.regions.join(", ")
                     item.partWithGender = item.part + (item.gender ? ` (${item.gender})` : "")
                     resultModel.append(item)
