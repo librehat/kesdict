@@ -13,6 +13,11 @@ ApplicationWindow {
 
     HttpRequest {
         id: http
+
+        function lookup() {
+            loading = true
+            http.request(`https://www.spanishdict.com/translate/${searchTextField.text}`)
+        }
     }
 
     Connections {
@@ -40,14 +45,13 @@ ApplicationWindow {
             TextField {
                 id: searchTextField
                 Layout.fillWidth: true
+                enabled: !loading
+                Keys.onReturnPressed: http.lookup()
             }
             Button {
-                enabled: searchTextField.text
+                enabled: searchTextField.text && !loading
                 text: "Search"
-                onClicked: {
-                    loading = true
-                    http.request(`https://www.spanishdict.com/translate/${searchTextField.text}`)
-                }
+                onClicked: http.lookup()
             }
         }
 
