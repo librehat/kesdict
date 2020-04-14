@@ -52,7 +52,7 @@ ApplicationWindow {
                 }
                 ToolButton {
                     enabled: searchTextField.text && !loading
-                    text: "Search"
+                    text: "🔍"
                     onClicked: http.lookup()
                 }
             }
