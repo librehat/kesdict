@@ -34,38 +34,41 @@ ApplicationWindow {
         }
     }
 
-    ColumnLayout {
-        spacing: 2
-        anchors.fill: parent
+    header: ToolBar {
+        ColumnLayout {
+            spacing: 5
+            anchors.fill: parent
+            anchors.margins: 5
 
-        RowLayout {
-            spacing: 2
-            Layout.fillWidth: true
-
-            TextField {
-                id: searchTextField
+            RowLayout {
+                spacing: 5
                 Layout.fillWidth: true
-                enabled: !loading
-                Keys.onReturnPressed: http.lookup()
-            }
-            Button {
-                enabled: searchTextField.text && !loading
-                text: "Search"
-                onClicked: http.lookup()
-            }
-        }
 
-        ProgressBar {
-            Layout.fillWidth: true
-            indeterminate: true
-            visible: loading
-        }
+                TextField {
+                    id: searchTextField
+                    Layout.fillWidth: true
+                    enabled: !loading
+                    Keys.onReturnPressed: http.lookup()
+                }
+                ToolButton {
+                    enabled: searchTextField.text && !loading
+                    text: "Search"
+                    onClicked: http.lookup()
+                }
+            }
 
-        ResultView {
-            id: resultView
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            opacity: loading ? 0 : 1
+            ProgressBar {
+                Layout.fillWidth: true
+                indeterminate: true
+                visible: loading
+            }
         }
+    }
+
+    ResultView {
+        id: resultView
+        anchors.fill: parent
+        anchors.margins: 10
+        opacity: loading ? 0 : 1
     }
 }
