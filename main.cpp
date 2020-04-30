@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QIcon>
 #include <QQmlApplicationEngine>
 
 int main(int argc, char *argv[])
@@ -6,6 +7,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication app(argc, argv);
+    app.setWindowIcon(QIcon(QStringLiteral(":/kesdict-icon.svg")));
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/standalone.qml")));
