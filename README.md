@@ -1,22 +1,22 @@
 # kesdict
+An unofficial SpanishDict application.
 
-This project is written in pure QML and aim to work on different platforms, albeit with a focus on KDE Plasma 5.
+This project is written in pure QML and aims to work on different platforms. The focus is on the KDE Plasma 5 environment hence the letter _K_ in the name.
 
-## Development
+## Requirements 
+ - Qt 5 >= 5.12
+ - CMake >= 3.1
+ - A C++ Compiler that supports C++ 14
 
-### C++ Laucher
-
-The C++ code is a simple basic laucher, to use it, run
-
-```
+## Installation
+```bash
 mkdir build && cd build
-cmake ..
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
 make
-./kesdict
+make install
 ```
 
-Note: The binary `kesdict` has all the QML and JS files bundled.
 
-### QML
+---------------------------------------------------
 
-Since it is written in pure QML, you can start the application with the command `qmlscene standalone.qml`.
+Disclaimer: This project is in no way affiliated with SpanishDict. Use at your own risk.
