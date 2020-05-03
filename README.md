@@ -3,6 +3,8 @@ An unofficial SpanishDict application.
 
 This project is written in pure QML and aims to work on different platforms. The focus is on the KDE Plasma 5 environment hence the letter _K_ in the name.
 
+![Screenshot (KDE)](https://github.com/librehat/kesdict/raw/master/screenshots/kesdict_kde.png)
+
 ## Requirements 
  - Qt 5 >= 5.12
  - CMake >= 3.1
