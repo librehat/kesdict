@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
-import "sdapi.dictionary.qml.js" as Dictionary
+import KesDict 1.0
 
 ApplicationWindow {
     visible: true

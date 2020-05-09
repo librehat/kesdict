@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>standalone.qml</file>
+        <file>kesdict-icon.svg</file>
+    </qresource>
+    <qresource prefix="/modules/">
+        <file>KesDict/qmldir</file>
+        <file>KesDict/HttpRequest.qml</file>
+        <file>KesDict/ResultDelegate.qml</file>
+        <file>KesDict/ResultView.qml</file>
+        <file>KesDict/sdapi.dictionary.qml.js</file>
+    </qresource>
+</RCC>

@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
     app.setWindowIcon(QIcon(QStringLiteral(":/kesdict-icon.svg")));
 
     QQmlApplicationEngine engine;
+    engine.addImportPath(QStringLiteral("qrc:/modules"));
     engine.load(QUrl(QStringLiteral("qrc:/standalone.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

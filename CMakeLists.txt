@@ -13,13 +13,13 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(Qt5 COMPONENTS Core Widgets Quick REQUIRED)
 
-add_executable(${PROJECT_NAME} "main.cpp" "qml.qrc")
+add_executable(${PROJECT_NAME} "src/main.cpp" "src/qml.qrc")
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core Qt5::Widgets Qt5::Quick)
 
 install(TARGETS ${PROJECT_NAME}
         RUNTIME DESTINATION bin)
 
 if (UNIX AND NOT APPLE)
-    install(FILES KesDict.desktop DESTINATION share/applications)
-    install(FILES kesdict-icon.svg DESTINATION share/icons/hicolor/512x512/apps)
+    install(FILES src/KesDict.desktop DESTINATION share/applications)
+    install(FILES src/kesdict-icon.svg DESTINATION share/icons/hicolor/512x512/apps)
 endif()

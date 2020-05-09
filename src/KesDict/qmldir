@@ -1,0 +1,5 @@
+module KesDict
+HttpRequest 1.0 HttpRequest.qml
+ResultDelegate 1.0 ResultDelegate.qml
+ResultView 1.0 ResultView.qml
+Dictionary 1.0 sdapi.dictionary.qml.js
