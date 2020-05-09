@@ -49,10 +49,11 @@ ApplicationWindow {
                     Layout.fillWidth: true
                     enabled: !loading
                     Keys.onReturnPressed: http.lookup()
+                    placeholderText: "Translate Spanish or English..."
                 }
                 ToolButton {
                     enabled: searchTextField.text && !loading
-                    text: "🔍"
+                    icon.name: "search"
                     onClicked: http.lookup()
                 }
             }

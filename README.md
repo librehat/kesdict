@@ -1,16 +1,19 @@
 # kesdict
 An unofficial SpanishDict application.
 
-This project is written in pure QML and aims to work on different platforms. The focus is on the KDE Plasma 5 environment hence the letter _K_ in the name.
+This project is written in pure QML and JavaScript. It runs on all major desktop platforms, but the focus is on the KDE Plasma 5 environment hence the letter _K_ in the name.
 
 ![Screenshot (KDE)](https://github.com/librehat/kesdict/raw/master/screenshots/kesdict_kde.png)
 
-## Requirements 
+## Standalone Application
+Any platforms that have Qt Quick 2.0 support can run this application in the standalone mode.
+
+### Requirements 
  - Qt 5 >= 5.12
  - CMake >= 3.1
  - A C++ Compiler that supports C++ 14
 
-## Installation
+### Installation
 ```bash
 mkdir build && cd build
 cmake -DCMAKE_INSTALL_PREFIX=/usr ..
@@ -18,6 +21,16 @@ make
 make install
 ```
 
+Then you can run `kesdict` from the terminal, or launch it from the applications menu.
+
+## KDE Plasma 5 Applet
+Applet-specific code can be found in `src/plasmoid` directory. QML and JS files that are shared between the standalone application and the applet are put under the QML module `KesDict` in `src/KesDict` directory.
+
+### Development
+For quick development, execute `./src/run_plasmoid.sh` to test the updated source code without the need of installation.
+
+### Installation
+_WIP_
 
 ---------------------------------------------------
 
