@@ -1,4 +1,5 @@
 import QtQuick 2.12
+import QtQuick.Layouts 1.12
 import org.kde.plasma.plasmoid 2.0
 import KesDict 1.0
 
@@ -6,6 +7,9 @@ Item {
     id: root
     property bool loading: false
     property var resultData
+
+    Plasmoid.switchWidth: theme.mSize(theme.defaultFont).width * 20
+    Plasmoid.switchHeight: theme.mSize(theme.defaultFont).height * 10
 
     HttpRequest {
         id: http
@@ -22,7 +26,9 @@ Item {
     }
 
     Plasmoid.fullRepresentation: FullWidget {
-        id: fullWidget
+        Layout.preferredWidth: theme.mSize(theme.defaultFont).width * 40
+        Layout.preferredHeight: theme.mSize(theme.defaultFont).height * 15
+
         onSearchRequested: http.lookup(text)
         loading: root.loading
         resultData: root.resultData

@@ -9,16 +9,10 @@ Item {
     property bool loading
     property var resultData
 
-    readonly property bool inPanel: (plasmoid.location === PlasmaCore.Types.TopEdge
-    || plasmoid.location === PlasmaCore.Types.RightEdge
-    || plasmoid.location === PlasmaCore.Types.BottomEdge
-    || plasmoid.location === PlasmaCore.Types.LeftEdge)
-
     signal searchRequested(string text)
 
     PlasmaComponents.ToolBar {
         id: toolbar
-        visible: !inPanel
         tools: PlasmaComponents.ToolBarLayout {
             Layout.fillWidth: true
 
@@ -39,11 +33,11 @@ Item {
     }
 
     Item {
-        anchors.top: toolbar.visible ? toolbar.bottom : parent.top
+        anchors.top: toolbar.bottom
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: 10
+        anchors.topMargin: 10
 
         PlasmaComponents.BusyIndicator {
             anchors.centerIn: parent
