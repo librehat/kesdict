@@ -1,13 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=KesDict
-Comment=SpanishDict dictionary plasmoid
+Comment=Translate Spanish or English with SpanishDict
 Type=Service
 Icon=languages
-
-X-KDE-Library=plasma_applet_tutorial
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Symeon Huang
+X-KDE-PluginInfo-Category=Language
 X-KDE-PluginInfo-Email=symeon@librehat.com
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Name=com.librehat.kesdict
@@ -16,4 +15,3 @@ X-KDE-PluginInfo-Website=https://github.com/librehat/kesdict
 X-KDE-ServiceTypes=Plasma/Applet
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml
-X-KDE-PluginInfo-Category=Language
