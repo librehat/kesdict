@@ -6,8 +6,7 @@ rm ~/.cache/plasma-svgelements-*
 
 killall plasmoidviewer
 
-SRC_PATH=`dirname $0`
-export QML2_IMPORT_PATH="$SRC_PATH"
+SRC_PATH=`dirname $0`/src
 export QML_DISABLE_DISK_CACHE=true
 
 plasmoidviewer -a "$SRC_PATH/plasmoid" -l bottomedge -f horizontal -x 0 -y 0

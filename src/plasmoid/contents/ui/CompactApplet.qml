@@ -8,7 +8,7 @@ Item {
 
     PlasmaComponents.Button {
         anchors.fill: parent
-        iconSource: "search" // TODO: kesdict icon
+        iconSource: "languages"
         onClicked: plasmoid.expanded = true
         // TODO: drag & drop text -> search
     }

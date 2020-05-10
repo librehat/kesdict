@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.12
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
-import KesDict 1.0
+import "./KesDict" as KesDict
 
 Item {
     property bool loading
@@ -45,7 +45,7 @@ Item {
             running: loading
         }
 
-        ResultView {
+        KesDict.ResultView {
             id: resultView
             anchors.fill: parent
             visible: !loading

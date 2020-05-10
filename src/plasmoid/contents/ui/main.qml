@@ -1,17 +1,17 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import org.kde.plasma.plasmoid 2.0
-import KesDict 1.0
+import "./KesDict" as KesDict
 
 Item {
     id: root
     property bool loading: false
     property var resultData
 
-    Plasmoid.switchWidth: theme.mSize(theme.defaultFont).width * 20
-    Plasmoid.switchHeight: theme.mSize(theme.defaultFont).height * 10
+    Plasmoid.switchWidth: theme.mSize(theme.defaultFont).width * 10
+    Plasmoid.switchHeight: theme.mSize(theme.defaultFont).height * 5
 
-    HttpRequest {
+    KesDict.HttpRequest {
         id: http
 
         function lookup(text) {
@@ -37,7 +37,7 @@ Item {
     Connections {
         target: http
         onResponseTextAvailable: {
-            root.resultData = Dictionary.extract(text)
+            root.resultData = KesDict.Dictionary.extract(text)
             root.loading = false
         }
         onError: {
