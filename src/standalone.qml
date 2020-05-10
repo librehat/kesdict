@@ -14,9 +14,9 @@ ApplicationWindow {
     HttpRequest {
         id: http
 
-        function lookup() {
+        function lookup(text) {
             loading = true
-            http.request(`https://www.spanishdict.com/translate/${searchTextField.text}`)
+            http.request(`https://www.spanishdict.com/translate/${text}`)
         }
     }
 
@@ -35,41 +35,39 @@ ApplicationWindow {
     }
 
     header: ToolBar {
-        ColumnLayout {
+        RowLayout {
             spacing: 5
             anchors.fill: parent
-            anchors.margins: 5
 
-            RowLayout {
-                spacing: 5
+            TextField {
+                id: searchTextField
                 Layout.fillWidth: true
-
-                TextField {
-                    id: searchTextField
-                    Layout.fillWidth: true
-                    enabled: !loading
-                    Keys.onReturnPressed: http.lookup()
-                    placeholderText: "Translate Spanish or English..."
-                }
-                ToolButton {
-                    enabled: searchTextField.text && !loading
-                    icon.name: "search"
-                    onClicked: http.lookup()
-                }
+                enabled: !loading
+                Keys.onReturnPressed: http.lookup(searchTextField.text)
+                placeholderText: "Translate Spanish or English..."
             }
-
-            ProgressBar {
-                Layout.fillWidth: true
-                indeterminate: true
-                visible: loading
+            ToolButton {
+                enabled: searchTextField.text && !loading
+                icon.name: "search"
+                onClicked: http.lookup(searchTextField.text)
             }
         }
     }
 
-    ResultView {
-        id: resultView
+    Item {
         anchors.fill: parent
-        anchors.margins: 10
-        opacity: loading ? 0 : 1
+        anchors.topMargin: 10
+
+        BusyIndicator {
+            anchors.centerIn: parent
+            running: loading
+            visible: loading
+        }
+
+        ResultView {
+            id: resultView
+            anchors.fill: parent
+            visible: !loading
+        }
     }
 }
