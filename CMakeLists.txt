@@ -11,10 +11,10 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-find_package(Qt5 COMPONENTS Core Widgets Quick REQUIRED)
+find_package(Qt5 COMPONENTS Core Widgets Quick QuickControls2 REQUIRED)
 
 add_executable(${PROJECT_NAME} "src/main.cpp" "src/qml.qrc")
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core Qt5::Widgets Qt5::Quick)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core Qt5::Widgets Qt5::Quick Qt5::QuickControls2)
 
 install(TARGETS ${PROJECT_NAME}
         RUNTIME DESTINATION bin)
