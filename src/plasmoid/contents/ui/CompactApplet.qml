@@ -8,7 +8,7 @@ Item {
 
     MouseArea {
         anchors.fill: parent
-        onReleased: plasmoid.expanded = true
+        onReleased: plasmoid.expanded = !plasmoid.expanded
         // TODO: drag & drop text -> search
     }
     
