@@ -1,15 +1,20 @@
 import QtQuick 2.12
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core 2.0
 import org.kde.plasma.plasmoid 2.0
 
 
 Item {
     signal searchRequested(string text)
 
-    PlasmaComponents.Button {
+    MouseArea {
         anchors.fill: parent
-        iconSource: "languages"
-        onClicked: plasmoid.expanded = true
+        onReleased: plasmoid.expanded = true
         // TODO: drag & drop text -> search
+    }
+    
+    SvgItem {
+        anchors.fill: parent
+        anchors.margins: 2
+        svg: Svg { imagePath: Qt.resolvedUrl("./kesdict-icon.svg") }
     }
 }

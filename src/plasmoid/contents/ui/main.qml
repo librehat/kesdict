@@ -10,6 +10,7 @@ Item {
 
     Plasmoid.switchWidth: theme.mSize(theme.defaultFont).width * 10
     Plasmoid.switchHeight: theme.mSize(theme.defaultFont).height * 5
+    Plasmoid.icon: Qt.resolvedUrl("./kesdict-icon.svg")
 
     KesDict.HttpRequest {
         id: http
