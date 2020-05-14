@@ -7,6 +7,7 @@ import "./KesDict" as KesDict
 
 Item {
     property bool loading
+    property string inputText
     property var resultData
 
     signal searchRequested(string text)
@@ -22,6 +23,7 @@ Item {
                 enabled: !loading
                 clearButtonShown: true
                 placeholderText: "Translate Spanish or English..."
+                text: inputText
                 Keys.onReturnPressed: searchRequested(searchTextField.text)
             }
             PlasmaComponents.ToolButton {

@@ -6,6 +6,7 @@ import "./KesDict" as KesDict
 Item {
     id: root
     property bool loading: false
+    property string inputText
     property var resultData
 
     Plasmoid.switchWidth: theme.mSize(theme.defaultFont).width * 10
@@ -23,7 +24,10 @@ Item {
 
     Plasmoid.compactRepresentation: CompactApplet {
         enabled: !loading
-        onSearchRequested: http.lookup(text)
+        onSearchRequested: {
+            http.lookup(text)
+            root.inputText = text
+        }
     }
 
     Plasmoid.fullRepresentation: FullWidget {
@@ -32,6 +36,7 @@ Item {
 
         onSearchRequested: http.lookup(text)
         loading: root.loading
+        inputText: root.inputText
         resultData: root.resultData
     }
 
