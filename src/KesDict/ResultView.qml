@@ -9,11 +9,12 @@ ScrollView {
     id: view
 
     ListView {
-        spacing: 10
+        spacing: font.pixelSize
         model:  ListModel {
             id: resultModel
         }
         delegate: ResultDelegate {
+            width: parent.width
         }
 
         Connections {

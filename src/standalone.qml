@@ -36,7 +36,7 @@ ApplicationWindow {
 
     header: ToolBar {
         RowLayout {
-            spacing: 5
+            spacing: font.pixelSize * 0.4
             anchors.fill: parent
 
             TextField {
@@ -56,7 +56,7 @@ ApplicationWindow {
 
     Item {
         anchors.fill: parent
-        anchors.topMargin: 10
+        anchors.topMargin: font.pixelSize
 
         BusyIndicator {
             anchors.centerIn: parent

@@ -39,7 +39,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.topMargin: 10
+        anchors.topMargin: font.pixelSize
 
         PlasmaComponents.BusyIndicator {
             anchors.centerIn: parent
