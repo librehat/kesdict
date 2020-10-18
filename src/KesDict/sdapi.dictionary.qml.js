@@ -855,29 +855,32 @@ function isTagType(tag, type, name) {
     }
     return true;
 }
-function extractComponentData(html) {
-    var body = lib_2(html)[1];
-    var dataSearchFn = function (element) {
-        return element.children.find(function (child) {
-            var _a;
-            return isTagType(child, 'element', 'script')
-                && ((_a = child.children) === null || _a === void 0 ? void 0 : _a.length)
-                && child.children[0].type === 'text'
-                && child.children[0].content.includes('SD_COMPONENT_DATA');
-        });
-    };
-    var resultTag;
-    for (var _i = 0, _a = body.children; _i < _a.length; _i++) {
-        var child = _a[_i];
-        resultTag = dataSearchFn(child);
-        if (resultTag) {
-            break;
-        }
+function extractComponentData(htmlString) {
+    var html = lib_2(htmlString).find(function (element) { return isTagType(element, 'element', 'html'); });
+    var body = html.children.find(function (element) { return isTagType(element, 'element', 'body'); });
+    if (!body) {
+        throw new Error('Cannot find the body tag. SpanishDict API might have changed');
     }
+    var dataComponentFindFn = function (element) {
+        var _a, _b;
+        for (var _i = 0, _c = (_a = element.children) !== null && _a !== void 0 ? _a : []; _i < _c.length; _i++) {
+            var child = _c[_i];
+            if (isTagType(child, 'element', 'script') && ((_b = child.children) === null || _b === void 0 ? void 0 : _b.length)) {
+                var grandResult = dataComponentFindFn(child);
+                if (grandResult) { // find it
+                    return grandResult;
+                }
+            }
+            if (child.type === 'text' && child.content.includes('SD_COMPONENT_DATA')) {
+                return child;
+            }
+        }
+    };
+    var resultTag = dataComponentFindFn(body);
     if (!resultTag) {
         throw new Error('Cannot find the tag with results. SpanishDict API might have changed');
     }
-    var resultsLine = resultTag.children[0].content.split('\n').find(function (line) { return line.includes('SD_COMPONENT_DATA'); });
+    var resultsLine = resultTag.content.split('\n').find(function (line) { return line.includes('SD_COMPONENT_DATA'); });
     return JSON.parse(resultsLine.substring(resultsLine.indexOf('=') + 1, resultsLine.length - 1));
 }
 
@@ -914,10 +917,10 @@ function convertSense(sense, lang) {
     });
 }
 function extract(html) {
-    var _a, _b, _c;
+    var _a;
     var resultsProps = extractComponentData(html).sdDictionaryResultsProps;
-    var neodict = (_b = (_a = resultsProps) === null || _a === void 0 ? void 0 : _a.entry) === null || _b === void 0 ? void 0 : _b.neodict;
-    if (!((_c = neodict) === null || _c === void 0 ? void 0 : _c.length)) {
+    var neodict = (_a = resultsProps === null || resultsProps === void 0 ? void 0 : resultsProps.entry) === null || _a === void 0 ? void 0 : _a.neodict;
+    if (!(neodict === null || neodict === void 0 ? void 0 : neodict.length)) {
         throw new Error('Cannot find neodict. SpanishDict API might have changed');
     }
     return neodict
